@@ -648,10 +648,6 @@ function OnLocationChanged(pathAndQuery) {
     });
 }
 
-window.addEventListener('popstate', function(evt) {
-	OnLocationChanged(window.location.pathname);
-});
-
 (function () {
     function ListenForReload(reloadOnConnection) {
         if (window.EventSource) {
@@ -741,7 +737,6 @@ window.addEventListener('popstate', function(evt) {
                         return isDll ? name.substring(0, name.length - 4) : null;
                     })
                 ));
-                OnLocationChanged(window.location.pathname);
             }
         };
 
