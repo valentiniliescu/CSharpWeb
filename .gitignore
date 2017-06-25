@@ -6,3 +6,9 @@
 /Blazor.Runtime/bin
 /Blazor.Runtime/obj
 /Blazor.Runtime/.vs
+/BlazorApplication1/bin
+/BlazorApplication1/obj
+/BlazorApplication1/.vs
+/BlazorApplication1/Properties/launchSettings.json
+*.user
+
