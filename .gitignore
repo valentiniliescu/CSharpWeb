@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/Blazor.Runtime/bin
+/Blazor.Runtime/obj
+/Blazor.Runtime/.vs
