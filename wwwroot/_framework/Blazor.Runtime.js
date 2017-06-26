@@ -12,7 +12,7 @@
 
         CreateElement: function(tagName) {
             var elem = document.createElement(tagName);
-            document.appendChild(elem);
+            document.body.appendChild(elem);
             return assignUniqueElementId(elem);
         },
 

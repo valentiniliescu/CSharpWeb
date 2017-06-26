@@ -17,7 +17,6 @@ namespace CSharpWeb
         protected static extern string SetInnerHTML(string descriptor);
 
         private string _id;
-        protected string TagName;
 
         public string InnerHTML
         {
@@ -25,17 +24,17 @@ namespace CSharpWeb
             set { SetInnerHTML(JsonUtil.Serialize(new Dictionary<string, string> { { "id", _id }, { "innerHTML", value } })); }
         }
 
-        public HTMLElement()
+        public HTMLElement(string tagName)
         {
-            _id = CreateElement(TagName);
+            _id = CreateElement(tagName);
         }
     }
 
     public class HTMLDivElement : HTMLElement
     {
-        public HTMLDivElement()
+        public HTMLDivElement() : base("div")
         {
-            TagName = "div";
+            
         }
     }
 }
