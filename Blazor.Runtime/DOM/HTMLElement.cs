@@ -19,6 +19,17 @@ namespace CSharpWeb
         [DllImport(@"browser.js", CharSet = CharSet.Ansi)]
         private static extern void AppendChild(string descriptor);
 
+        [DllImport(@"browser.js", CharSet = CharSet.Ansi)]
+        private static extern void AddEventListener(string descriptor);
+
+        private static int nextEventHandlerId = 0;
+        private static readonly IDictionary<int, DomEventHandler> eventHandlersMap = new Dictionary<int, DomEventHandler>();
+
+        public static void ExecuteEventHandler(string eventHandlerId)
+        {
+            eventHandlersMap[int.Parse(eventHandlerId)]();
+        }
+
         private string _id;
 
         public string InnerText
@@ -42,8 +53,15 @@ namespace CSharpWeb
             AppendChild(JsonUtil.Serialize(new Dictionary<string, string> { { "id", child._id } }));
         }
 
-        // TODO: on finalize, remove the id from elementsById table
+        protected void AddEventHandler(string eventName, DomEventHandler handler)
+        {
+            var eventHandlerId = ++nextEventHandlerId;
+            eventHandlersMap.Add(eventHandlerId, handler);
+            AddEventListener(JsonUtil.Serialize(new Dictionary<string, string> { { "id", _id }, { "eventHandlerId", eventHandlerId.ToString() }, { "eventName", eventName } }));
+        }
     }
+
+    public delegate void DomEventHandler();
 
     public class HTMLDivElement : HTMLElement
     {
@@ -55,6 +73,11 @@ namespace CSharpWeb
 
     public class HTMLButtonElement : HTMLElement
     {
+        public event DomEventHandler Click
+        {
+            add { AddEventHandler("click", value); }
+            remove { }
+        }
         public HTMLButtonElement() : base("button")
         {
 

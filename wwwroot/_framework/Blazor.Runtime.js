@@ -37,6 +37,14 @@
             elem.innerText = item.innerText;
         },
 
+        AddEventListener: function (descriptor) {
+            var item = JSON.parse(descriptor);
+            var elem = elementsById[item.id];
+            elem.addEventListener(item.eventName, function () {
+                InvokeStatic('Blazor.Runtime', 'CSharpWeb', 'HTMLElement', 'ExecuteEventHandler', item.eventHandlerId );
+            }, false);
+        },
+
 		RenderComponent: function(descriptor) {
 			var item = JSON.parse(descriptor);
 			var elem = document.getElementById(item.elementId);
