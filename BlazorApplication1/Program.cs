@@ -9,6 +9,10 @@ namespace BlazorApplication1
             var div = new HTMLDivElement();
             HTMLElement.AppendChildToRoot(div);
             div.InnerText = "Hello world!";
+
+            var button = new HTMLButtonElement();
+            HTMLElement.AppendChildToRoot(button);
+            button.InnerText = "Click me!";
         }
     }
 }

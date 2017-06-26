@@ -52,4 +52,12 @@ namespace CSharpWeb
 
         }
     }
+
+    public class HTMLButtonElement : HTMLElement
+    {
+        public HTMLButtonElement() : base("button")
+        {
+
+        }
+    }
 }
