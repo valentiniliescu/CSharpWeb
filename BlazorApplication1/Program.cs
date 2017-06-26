@@ -7,7 +7,8 @@ namespace BlazorApplication1
         static void Main(string[] args)
         {
             var div = new HTMLDivElement();
-            div.InnerHTML = "Hello world!";
+            HTMLElement.AppendChildToRoot(div);
+            div.InnerText = "Hello world!";
         }
     }
 }

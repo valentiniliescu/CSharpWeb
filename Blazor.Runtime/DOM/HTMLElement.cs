@@ -8,33 +8,48 @@ namespace CSharpWeb
     public class HTMLElement
     {
         [DllImport(@"browser.js", CharSet = CharSet.Ansi)]
-        protected static extern string CreateElement(string tagName);
+        private static extern string CreateElement(string tagName);
 
         [DllImport(@"browser.js", CharSet = CharSet.Ansi)]
-        protected static extern string GetInnerHTML(string id);
+        private static extern string GetInnerText(string id);
 
         [DllImport(@"browser.js", CharSet = CharSet.Ansi)]
-        protected static extern string SetInnerHTML(string descriptor);
+        private static extern void SetInnerText(string descriptor);
+
+        [DllImport(@"browser.js", CharSet = CharSet.Ansi)]
+        private static extern void AppendChild(string descriptor);
 
         private string _id;
 
-        public string InnerHTML
+        public string InnerText
         {
-            get { return GetInnerHTML(_id); }
-            set { SetInnerHTML(JsonUtil.Serialize(new Dictionary<string, string> { { "id", _id }, { "innerHTML", value } })); }
+            get { return GetInnerText(_id); }
+            set { SetInnerText(JsonUtil.Serialize(new Dictionary<string, string> { { "id", _id }, { "innerText", value } })); }
         }
 
         public HTMLElement(string tagName)
         {
             _id = CreateElement(tagName);
         }
+
+        public void AppendChild(HTMLElement child)
+        {
+            AppendChild(JsonUtil.Serialize(new Dictionary<string, string> { { "id", child._id }, { "parentId", _id } }));
+        }
+
+        public static void AppendChildToRoot(HTMLElement child)
+        {
+            AppendChild(JsonUtil.Serialize(new Dictionary<string, string> { { "id", child._id } }));
+        }
+
+        // TODO: on finalize, remove the id from elementsById table
     }
 
     public class HTMLDivElement : HTMLElement
     {
         public HTMLDivElement() : base("div")
         {
-            
+
         }
     }
 }

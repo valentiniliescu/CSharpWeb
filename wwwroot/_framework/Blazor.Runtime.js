@@ -1,5 +1,7 @@
 ﻿(function() {
-	var nextElemId = 0;
+    var nextElemId = 0;
+
+    var elementsById = {};
 
 	window['browser.js'] = {
 		JSEval: function(code) {
@@ -10,21 +12,29 @@
 			alert(message);
         },
 
+        AppendChild: function (descriptor) {
+            var item = JSON.parse(descriptor);
+            var parent = item.parentId ? elementsById[item.parentId] : document.body;
+            var child = elementsById[item.id];
+            parent.appendChild(child);
+        },
+
         CreateElement: function(tagName) {
             var elem = document.createElement(tagName);
-            document.body.appendChild(elem);
-            return assignUniqueElementId(elem);
+            var id = assignUniqueElementId(elem);
+            elementsById[id] = elem;
+            return id;
         },
 
-        GetInnerHTML: function(id) {
-            var elem = document.getElementById(id);
-            return elem.innerHTML;
+        GetInnerText: function(id) {
+            var elem = elementsById[id];
+            return elem.innerText;
         },
 
-        SetInnerHTML: function (descriptor) {
+        SetInnerText: function (descriptor) {
             var item = JSON.parse(descriptor);
-            var elem = document.getElementById(item.id);
-            elem.innerHTML = item.innerHTML;
+            var elem = elementsById[item.id];
+            elem.innerText = item.innerText;
         },
 
 		RenderComponent: function(descriptor) {
