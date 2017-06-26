@@ -1,4 +1,4 @@
-﻿using Blazor.Interop;
+﻿using CSharpWeb;
 
 namespace BlazorApplication1
 {
@@ -6,7 +6,8 @@ namespace BlazorApplication1
     {
         static void Main(string[] args)
         {
-            Browser.Alert("Hello world!");
+            var div = new HTMLDivElement();
+            div.InnerHTML = "Hello world!";
         }
     }
 }

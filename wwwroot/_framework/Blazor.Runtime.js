@@ -8,7 +8,24 @@
 
 		Alert: function(message) {
 			alert(message);
-		},
+        },
+
+        CreateElement: function(tagName) {
+            var elem = document.createElement(tagName);
+            document.appendChild(elem);
+            return assignUniqueElementId(elem);
+        },
+
+        GetInnerHTML: function(id) {
+            var elem = document.getElementById(id);
+            return elem.innerHTML;
+        },
+
+        SetInnerHTML: function (descriptor) {
+            var item = JSON.parse(descriptor);
+            var elem = document.getElementById(item.id);
+            elem.innerHTML = item.innerHTML;
+        },
 
 		RenderComponent: function(descriptor) {
 			var item = JSON.parse(descriptor);
