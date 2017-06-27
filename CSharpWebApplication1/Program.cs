@@ -1,6 +1,6 @@
 ﻿using CSharpWeb;
 
-namespace BlazorApplication1
+namespace CSharpWebApplication1
 {
     public class Program
     {

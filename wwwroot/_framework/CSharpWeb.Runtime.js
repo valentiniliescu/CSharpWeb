@@ -33,7 +33,7 @@
             var item = JSON.parse(descriptor);
             var elem = elementsById[item.id];
             elem.addEventListener(item.eventName, function () {
-                InvokeStatic('Blazor.Runtime', 'CSharpWeb', 'HTMLElement', 'ExecuteEventHandler', item.eventHandlerId );
+                InvokeStatic('CSharpWeb.Runtime', 'CSharpWeb', 'HTMLElement', 'ExecuteEventHandler', item.eventHandlerId );
             }, false);
         },
 
@@ -91,7 +91,7 @@ function InvokeStatic(assemblyName, namespace, className, methodName, stringArg)
         var preloadAssemblies = [entryPoint].concat(referenceAssemblies).map(function (assemblyName) {
             return { assemblyName: assemblyName, url: '_bin/' + assemblyName };
         });
-        preloadAssemblies.push({ assemblyName: 'Blazor.Runtime.dll', url: '_framework/Blazor.Runtime.dll' });
+        preloadAssemblies.push({ assemblyName: 'CSharpWeb.Runtime.dll', url: '_framework/CSharpWeb.Runtime.dll' });
 
         window.Module = {
             wasmBinaryFile: '_framework/wasm/dna.wasm',
@@ -106,7 +106,7 @@ function InvokeStatic(assemblyName, namespace, className, methodName, stringArg)
                 });
             },
             postRun: function () {
-                InvokeStatic('Blazor.Runtime', 'Blazor.Runtime.Interop', 'Startup', 'EnsureAssembliesLoaded', JSON.stringify(
+                InvokeStatic('CSharpWeb.Runtime', 'CSharpWeb.Runtime.Interop', 'Startup', 'EnsureAssembliesLoaded', JSON.stringify(
                     preloadAssemblies.map(function (assemblyInfo) {
                         var name = assemblyInfo.assemblyName;
                         var isDll = name.substring(name.length - 4) === '.dll';

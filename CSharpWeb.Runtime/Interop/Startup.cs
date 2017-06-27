@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Blazor.Runtime.Interop
+namespace CSharpWeb.Runtime.Interop
 {
     public static class Startup
     {
