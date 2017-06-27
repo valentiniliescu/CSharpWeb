@@ -6,12 +6,15 @@ namespace CSharpWebApplication1
     {
         static void Main()
         {
+            var rootDiv = new HTMLDivElement();
+            HTMLElement.AppendChildToRoot(rootDiv);
+
             var div = new HTMLDivElement();
-            HTMLElement.AppendChildToRoot(div);
+            rootDiv.AppendChild(div);
             div.InnerText = "Hello world!";
 
             var button = new HTMLButtonElement();
-            HTMLElement.AppendChildToRoot(button);
+            rootDiv.AppendChild(button);
             button.InnerText = "Click me!";
 
             button.Click += () => { div.InnerText = "Hello world again!"; };
