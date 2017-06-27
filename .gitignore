@@ -3,12 +3,12 @@
 ################################################################################
 
 /.vs
-/Blazor.Runtime/bin
-/Blazor.Runtime/obj
-/Blazor.Runtime/.vs
-/BlazorApplication1/bin
-/BlazorApplication1/obj
-/BlazorApplication1/.vs
-/BlazorApplication1/Properties/launchSettings.json
+/CSharpWeb.Runtime/bin
+/CSharpWeb.Runtime/obj
+/CSharpWeb.Runtime/.vs
+/CSharpWebApplication1/bin
+/CSharpWebApplication1/obj
+/CSharpWebApplication1/.vs
+/CSharpWebApplication1/Properties/launchSettings.json
 *.user
 
