@@ -1,0 +1,27 @@
+[
+  {
+    "DateFormatted": "06/05/2017",
+    "TemperatureC": 1,
+    "Summary": "Freezing"
+  },
+  {
+    "DateFormatted": "07/05/2017",
+    "TemperatureC": 14,
+    "Summary": "Bracing"
+  },
+  {
+    "DateFormatted": "08/05/2017",
+    "TemperatureC": -13,
+    "Summary": "Freezing"
+  },
+  {
+    "DateFormatted": "09/05/2017",
+    "TemperatureC": -16,
+    "Summary": "Balmy"
+  },
+  {
+    "DateFormatted": "10/05/2017",
+    "TemperatureC": -2,
+    "Summary": "Chilly"
+  }
+]
