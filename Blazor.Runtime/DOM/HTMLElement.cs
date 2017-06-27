@@ -1,7 +1,6 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Blazor.Util;
+using MiniJSON;
 
 namespace CSharpWeb
 {
@@ -35,7 +34,7 @@ namespace CSharpWeb
         public string InnerText
         {
             get { return GetInnerText(_id); }
-            set { SetInnerText(JsonUtil.Serialize(new Dictionary<string, string> { { "id", _id }, { "innerText", value } })); }
+            set { SetInnerText(Json.Serialize(new Dictionary<string, string> { { "id", _id }, { "innerText", value } })); }
         }
 
         public HTMLElement(string tagName)
@@ -45,42 +44,19 @@ namespace CSharpWeb
 
         public void AppendChild(HTMLElement child)
         {
-            AppendChild(JsonUtil.Serialize(new Dictionary<string, string> { { "id", child._id }, { "parentId", _id } }));
+            AppendChild(Json.Serialize(new Dictionary<string, string> { { "id", child._id }, { "parentId", _id } }));
         }
 
         public static void AppendChildToRoot(HTMLElement child)
         {
-            AppendChild(JsonUtil.Serialize(new Dictionary<string, string> { { "id", child._id } }));
+            AppendChild(Json.Serialize(new Dictionary<string, string> { { "id", child._id } }));
         }
 
         protected void AddEventHandler(string eventName, DomEventHandler handler)
         {
             var eventHandlerId = ++nextEventHandlerId;
             eventHandlersMap.Add(eventHandlerId, handler);
-            AddEventListener(JsonUtil.Serialize(new Dictionary<string, string> { { "id", _id }, { "eventHandlerId", eventHandlerId.ToString() }, { "eventName", eventName } }));
-        }
-    }
-
-    public delegate void DomEventHandler();
-
-    public class HTMLDivElement : HTMLElement
-    {
-        public HTMLDivElement() : base("div")
-        {
-
-        }
-    }
-
-    public class HTMLButtonElement : HTMLElement
-    {
-        public event DomEventHandler Click
-        {
-            add { AddEventHandler("click", value); }
-            remove { }
-        }
-        public HTMLButtonElement() : base("button")
-        {
-
+            AddEventListener(Json.Serialize(new Dictionary<string, string> { { "id", _id }, { "eventHandlerId", eventHandlerId.ToString() }, { "eventName", eventName } }));
         }
     }
 }
